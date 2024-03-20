@@ -1,55 +1,75 @@
-import * as React from 'react';
-import { View } from 'react-native';
+// App.js
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome } from '@expo/vector-icons';import { Feather } from '@expo/vector-icons';
-import ContactUs from './screens/ContactUs';
-import Home from './screens/Home';
-import Settings from './screens/Settings';
-import Colors from './Components/Colors';
+import { Ionicons } from '@expo/vector-icons';
+import Colors from './components/Colors';
+import Home from './screens/home';
+import About from './screens/about';
+import { StatusBar } from 'react-native';
+
+// Inside your component
+
 const Tab = createBottomTabNavigator();
 
-
-
-export default function App() {
+const App = () => {
   return (
-    
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          headerShown:false,
-          tabBarIcon: ({ color, size }) => {
-            const icons = {
-              الرئيسية: 'home',
-              الاعدادات: 'gear',
-              اتصل_بنا: 'headphones',
-            };
+<StatusBar backgroundColor={Colors.mainColor} barStyle="light-content" />
+<Tab.Navigator
+  screenOptions={({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
 
-            return (
-              <FontAwesome
-                name={icons[route.name]}
-                color={color}
-                size={size}
-              />
-            );
-          },
-          
-            "tabBarActiveTintColor": Colors.thirdColor,
-            "tabBarStyle": [
-              {
-                "display": "flex",
-                backgroundColor:Colors.mainColor
-              },
-              null
-            ]
-          
-        })}
-        
-      >
-        <Tab.Screen name="الرئيسية" component={Home} />
-        <Tab.Screen name="الاعدادات" component={Settings} />
-        <Tab.Screen name="اتصل_بنا" component={ContactUs} />
+      if (route.name === 'الرئيسية') {
+        iconName = focused ? 'home' : 'home-outline';
+      } else if (route.name === 'عن المشروع') {
+        iconName = focused ? 'information-circle' : 'information-circle-outline';
+      }
+
+      // You can return any component that you like here!
+      return <Ionicons name={iconName} size={size} color={color} />;
+    },
+    tabBarActiveTintColor: "#fff",
+    tabBarInactiveTintColor: '#cecece',
+    tabBarInactiveBackgroundColor:Colors.mainColor,
+    tabBarActiveBackgroundColor:Colors.mainColor
+  })}
+>
+
+        <Tab.Screen
+          name="الرئيسية"
+          component={Home}
+          options={{
+            headerStyle: {
+              backgroundColor: Colors.mainColor,
+              borderBottomEndRadius: 20,
+              borderBottomStartRadius:20
+            },
+            headerTitleStyle: {
+              color: 'white',
+            },
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Tab.Screen
+          name="عن المشروع"
+          component={About}
+          options={{
+            headerStyle: {
+              backgroundColor: Colors.mainColor,
+              borderBottomEndRadius: 20,
+              borderBottomStartRadius:20
+            },
+            headerTitleStyle: {
+              color: 'white',
+            },
+            headerTitleAlign: 'center',
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;

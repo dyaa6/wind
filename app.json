@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "incubator",
+    "name": "Wind Speed",
     "slug": "incubator",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.deyaa.incubator"
+      "package": "com.ntu.deyaa.wind"
     },
     "web": {
       "favicon": "./assets/favicon.png"
